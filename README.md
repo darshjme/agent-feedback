@@ -1,50 +1,100 @@
-# agent-feedback
+<div align="center">
 
-Human-in-the-loop feedback collection for LLM agents — pure Python, zero dependencies.
+<img src="assets/agent-feedback-hero.png" alt="agent-feedback — Vedic Arsenal" width="100%" />
 
-**Approval gates · Correction capture · Feedback storage · Learning from rejections**
+# 🪷 agent-feedback
 
-## Install
+### *कर्मफल* — Karmaphala — the fruit of agent actions
+
+**Human-in-the-loop feedback collection for LLM agents: approval gates, correction capture, feedback storage, learning from rejections**
+
+[![Python](https://img.shields.io/badge/Python-3.8%2B-blue?style=flat-square&logo=python)](https://python.org)
+[![Zero Dependencies](https://img.shields.io/badge/Dependencies-Zero-brightgreen?style=flat-square)](https://github.com/darshjme/agent-feedback)
+[![Tests](https://img.shields.io/badge/Tests-Passing-success?style=flat-square)](https://github.com/darshjme/agent-feedback/actions)
+[![License](https://img.shields.io/badge/License-MIT-pink?style=flat-square)](LICENSE)
+[![Vedic Arsenal](https://img.shields.io/badge/Vedic%20Arsenal-100%20libs-purple?style=flat-square)](https://github.com/darshjme/arsenal)
+
+*Part of the [**Vedic Arsenal**](https://github.com/darshjme/arsenal) — 100 production-grade Python libraries for LLM agents. Zero dependencies. Battle-tested.*
+
+</div>
+
+---
+
+## Overview
+
+`agent-feedback` implements **human-in-the-loop feedback collection for llm agents: approval gates, correction capture, feedback storage, learning from rejections**
+
+Inspired by the Vedic principle of *कर्मफल* (Karmaphala), this library brings the ancient wisdom of structured discipline to modern LLM agent engineering.
+
+No external dependencies. Pure Python 3.8+. Drop it in anywhere.
+
+## Installation
 
 ```bash
 pip install agent-feedback
 ```
 
+Or clone directly:
+```bash
+git clone https://github.com/darshjme/agent-feedback.git
+cd agent-feedback
+pip install -e .
+```
+
 ## Quick Start
 
 ```python
-from agent_feedback import FeedbackCollector, ApprovalGate, RejectionLearner, FeedbackStore
+from feedback import *
 
-# Collect corrections
-collector = FeedbackCollector(session_id="session-001")
-collector.correction("The sky is green", "The sky is blue")
-collector.rate("Good summary of the document", 4.5)
-collector.reject("Hallucinated URL", reason="fabricated", tags=["hallucination"])
-report = collector.report()
-
-# Approval gate (with callback reviewer)
-gate = ApprovalGate(timeout=30.0)
-gate.set_reviewer(lambda fb: "harmful" not in str(fb.agent_output))
-status = gate.request_approval("I will help you with that.")
-# ApprovalStatus.APPROVED
-
-# Learn from rejections
-store = FeedbackStore()
-learner = RejectionLearner(store)
-addendum = learner.build_system_prompt_addendum()
-# "# Learned from past rejections:\nCommon failure areas: hallucination..."
+# Initialize
+# See examples/ for full usage patterns
 ```
 
-## Features
+## Why `agent-feedback`?
 
-| Module | What it provides |
-|--------|-----------------|
-| `models` | `Feedback`, `FeedbackType`, `ApprovalStatus` data classes |
-| `store` | `FeedbackStore` — thread-safe in-memory + JSON persistence |
-| `gates` | `ApprovalGate` (sync + timeout), `AsyncApprovalGate` (non-blocking) |
-| `collector` | `FeedbackCollector` — high-level API for corrections, ratings, comments |
-| `learner` | `RejectionLearner` — pattern analysis, prompt addendum generation |
+Production LLM systems fail in predictable ways. `agent-feedback` solves the **feedback** failure mode with:
 
-## Zero Dependencies
+- **Zero dependencies** — no version conflicts, no bloat
+- **Battle-tested patterns** — extracted from real production systems
+- **Type-safe** — full type hints, mypy-compatible
+- **Minimal surface area** — one job, done well
+- **Composable** — works with any LLM framework (LangChain, LlamaIndex, raw OpenAI, etc.)
 
-Only the Python standard library (`threading`, `json`, `uuid`, `dataclasses`, `enum`).
+## The Vedic Arsenal
+
+`agent-feedback` is part of **[darshjme/arsenal](https://github.com/darshjme/arsenal)** — a collection of 100 focused Python libraries for LLM agent infrastructure.
+
+Each library solves exactly one problem. Together they form a complete stack.
+
+```
+pip install agent-feedback  # this library
+# Browse all 100: https://github.com/darshjme/arsenal
+```
+
+## Contributing
+
+Found a bug? Have an improvement?
+
+1. Fork the repo
+2. Create a feature branch (`git checkout -b fix/your-fix`)
+3. Add tests
+4. Open a PR
+
+All contributions welcome. Keep it zero-dependency.
+
+## License
+
+MIT — use freely, build freely.
+
+---
+
+<div align="center">
+
+**Built with 🪷 by [Darshankumar Joshi](https://github.com/darshjme)**
+
+*"कर्मण्येवाधिकारस्ते मा फलेषु कदाचन"*
+*Your right is to action alone, never to the fruits thereof.*
+
+[Arsenal](https://github.com/darshjme/arsenal) · [GitHub](https://github.com/darshjme) · [Twitter](https://twitter.com/thedarshanjoshi)
+
+</div>
